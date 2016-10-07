@@ -1,0 +1,112 @@
+default vesamenu.c32
+prompt 0
+timeout 500
+ONTIMEOUT local1
+
+MENU TITLE Chin-Hsueh Primary School - PXE Menu
+
+LABEL local1
+    MENU LABEL * Boot from first hard disk *
+    KERNEL chain.c32
+    APPEND hd0
+
+LABEL ezgo
+  menu label ^Start ezgo12
+  kernel images/ezgo/casper/vmlinuz.efi
+  append root=/dev/nfs nfsroot=163.26.68.3:/mnt/ezgo netboot=nfs ip=dhcp file=/cdrom/preseed/kubuntu.seed boot=casper initrd=images/ezgo/casper/1.initrd.lz locale=zh_TW.UTF-8 quiet splash --
+
+LABEL sysrcd-64
+    MENU LABEL SystemRescueCd (64) [163.26.68.3]
+    KERNEL images/sysrcd/rescue64
+    APPEND initrd=images/sysrcd/initram.igz dodhcp netboot=http://163.26.68.3/sysrcd/sysrcd.dat
+
+LABEL sysrcd-32
+    MENU LABEL SystemRescueCd [163.26.68.3]
+    KERNEL images/sysrcd/rescue32
+    APPEND initrd=images/sysrcd/initram.igz dodhcp netboot=http://163.26.68.3/sysrcd/sysrcd.dat
+
+LABEL fedora
+  menu label ^Install Fedora 23 (x86_64)
+  kernel images/fedora/vmlinuz
+  append initrd=images/fedora/initrd.img inst.stage2=http://download.fedoraproject.org/pub/fedora/linux/releases/23/Server/x86_64/os/ ip=dhcp
+
+LABEL FreeDOS
+    MENU LABEL FreeDOS
+    KERNEL memdisk
+    APPEND initrd=images/clonezilla/freedos.img
+    TEXT HELP
+    Run FreeDOS
+    ENDTEXT
+
+LABEL Clonezilla live
+    MENU LABEL Clonezilla live (Default settings, VGA 800x600)
+    KERNEL images/clonezilla/vmlinuz
+    APPEND initrd=/images/clonezilla/initrd.img boot=live union=overlay username=user config components quiet noswap edd=on nomodeset nodmraid noeject locales= keyboard-layouts= ocs_live_run="ocs-live-general" ocs_live_extra_param="" ocs_live_batch=no vga=788 ip= net.ifnames=0  nosplash i915.blacklist=yes radeonhd.blacklist=yes nouveau.blacklist=yes vmwgfx.enable_fbdev=1 fetch=tftp://163.26.68.3/images/clonezilla/filesystem.squashfs
+    TEXT HELP
+    * Boot menu for BIOS machine
+    * Clonezilla live version: 2.4.2-32-amd64. (C) 2003-2015, NCHC, Taiwan
+    * Disclaimer: Clonezilla comes with ABSOLUTELY NO WARRANTY
+    ENDTEXT
+
+LABEL Ghost
+    MENU LABEL Ghost
+    KERNEL memdisk
+    INITRD images/ghost/ghost.iso
+    APPEND iso
+
+LABEL memtest
+    MENU LABEL MEMTEST: Memory test using Memtest86+
+    KERNEL images/bootdisk/memtestp
+    APPEND -
+    TEXT HELP
+    Use this tool if you suspect your RAM from being damaged. Damaged memory can
+    explain crashes or unexpected bahaviors on stable operating systems.
+    ENDTEXT
+
+LABEL ntpass
+    MENU LABEL NTPASSWD: Reset or edit Windows passwords
+    KERNEL images/ntpasswd/vmlinuz
+    APPEND rw vga=1 initrd=images/ntpasswd/initrd.cgz,images/ntpasswd/scsi.cgz
+    TEXT HELP
+    This tool can be used to reset windows users accounts. It works with all
+    windows user accounts including the administrator. You can use this tool if
+    you forgot the administrator's password.
+    ENDTEXT
+
+LABEL grubdisk2
+    MENU LABEL SGD: Super Grub2 Disk (Hybrid)
+    KERNEL memdisk
+    APPEND initrd=images/bootdisk/super_grub2_disk_hybrid_2.02s4.iso iso
+
+LABEL grubdisk
+    MENU LABEL SGD: Super Grub2 Disk
+    KERNEL memdisk
+    APPEND initrd=images/bootdisk/grubdisk.img iso
+
+LABEL hdt
+    MENU LABEL HDT: recent hardware diagnostics tool
+    KERNEL memdisk
+    APPEND initrd=images/bootdisk/hdt.img floppy
+    TEXT HELP
+    This diagnostic tool will give you information about your hardware
+    ENDTEXT
+
+LABEL aida
+    MENU LABEL AIDA: old hardware diagnostics tool
+    KERNEL memdisk
+    APPEND initrd=images/bootdisk/aida.img floppy
+
+LABEL gag
+    MENU LABEL GAG: Graphical Boot Manager
+    KERNEL memdisk
+    append initrd=images/bootdisk/gag.img floppy
+
+LABEL dban
+    MENU LABEL DBAN: erase all data from the disk
+    KERNEL images/bootdisk/dban.bzi
+    APPEND nuke="dwipe" silent
+
+LABEL mhdd
+    MENU LABEL MHDD: Low-level Hard Drive diagnostic tool
+    KERNEL memdisk
+    APPEND initrd=/bootdisk/mhdd.img floppy

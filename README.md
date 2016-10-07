@@ -12,3 +12,9 @@ dhcpd and PXE boot config files for CHPS
   - [GAG (initials, in spanish, of Graphical Boot Manager)](http://gag.sourceforge.net/)
   - [DBAN](http://www.dban.org/)
   - [Fedora](https://getfedora.org/)
+  
+## Ubuntu Create Floppy Image
+  - [Ubuntu Create Floppy Image](http://www.richud.com/wiki/Ubuntu_Create_Floppy_Image)
+  
+## LiveCDCustomization (Rebuilding initrd)
+  - [LiveCDCustomization](https://help.ubuntu.com/community/LiveCDCustomization#Rebuilding_initrd)

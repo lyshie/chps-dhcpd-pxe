@@ -18,3 +18,6 @@ dhcpd and PXE boot config files for CHPS
   
 ## LiveCDCustomization (Rebuilding initrd)
   - [LiveCDCustomization](https://help.ubuntu.com/community/LiveCDCustomization#Rebuilding_initrd)
+
+## About DRBL booting process
+  - ![20161008_215533-1.jpg](images/20161008_215533-1.jpg)
